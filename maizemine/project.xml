@@ -1,0 +1,54 @@
+<project type="bio">
+  <property name="target.model" value="genomic"/>
+  <property name="source.location" location="../bio/sources/"/>
+  <property name="common.os.prefix" value="common"/>
+  <property name="intermine.properties.file" value="maizemine.properties"/>
+  <property name="default.intermine.properties.file" location="../default.intermine.integrate.properties"/>
+  <sources>
+
+    <source name="maize-gff" type="maize-gff">
+      <property name="gff3.taxonId" value="4577"/>
+      <property name="gff3.seqDataSourceName" value="MaizeGDB"/>
+      <property name="gff3.dataSourceName" value="MaizeGDB"/>
+      <property name="gff3.seqClsName" value="Chromosome"/>
+      <property name="gff3.dataSetTitle" value="MaizeGDB Zea mays B73 RefGen_v3 genome"/>
+      <property name="src.data.dir" location="/Users/hungnn/Projects/maizegdb_data/gff3/chromosome"/>
+    </source>
+
+    <source name="maize-dna-fasta" type="fasta" dump="true">
+      <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+      <property name="fasta.dataSourceName" value="MaizeGDB"/>
+      <property name="fasta.dataSetTitle" value="MaizeGDB chromosome sequence"/>
+      <property name="fasta.taxonId" value="4577"/>
+      <property name="fasta.includes" value="Zea_mays.AGPv3.30.dna.chromosome.*.fa"/>
+      <property name="src.data.dir" location="/Users/hungnn/Projects/maizegdb_data/fasta/dna/chromosome"/>
+    </source>
+
+    <source name="maize-cdna-fasta" type="fasta" dump="true">
+      <property name="fasta.className" value="org.intermine.model.bio.Chromosome"/>
+      <property name="fasta.dataSourceName" value="MaizeGDB"/>
+      <property name="fasta.dataSetTitle" value="MaizeGDB chromosome sequence"/>
+      <property name="fasta.taxonId" value="4577"/>
+      <property name="fasta.includes" value="Zea_mays.AGPv3.22.cdna.all.fa"/>
+      <property name="src.data.dir" location="/Users/hungnn/Projects/maizegdb_data/fasta/cdna"/>
+    </source>
+
+    <source name="entrez-organism" type="entrez-organism" dump="true">
+      <property name="src.data.file" location="build/organisms.xml"/>
+    </source>
+  </sources>
+
+  <post-processing>
+    <post-process name="create-references"/>
+    <post-process name="transfer-sequences" dump="true"/>
+
+    <!-- this runs the postprocessing steps in all sources -->
+    <post-process name="do-sources"/>
+
+    <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
+    <post-process name="create-search-index"/>
+  </post-processing>
+
+</project>
+

@@ -12,6 +12,9 @@ executeLog*
 *.class
 productionLog
 *~
+.DS_Store
+.classpath
+.project
 
 !/intermine/webservice/client/download/dist/
 
