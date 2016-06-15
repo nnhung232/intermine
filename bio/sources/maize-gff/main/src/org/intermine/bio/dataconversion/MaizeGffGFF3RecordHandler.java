@@ -60,6 +60,11 @@ public class MaizeGffGFF3RecordHandler extends GFF3RecordHandler
 //                feature.setAttribute("secondaryIdentifier", secondary.substring(secondary.indexOf(':') + 1));
 //            }
 //        }
+        if(record.getType().equalsIgnoreCase("gene") || record.getType().equalsIgnoreCase("transcript")) {
+            Item feature = getFeature();
+            String primaryIdentifier = feature.getAttribute("primaryIdentifier").getValue();
+            feature.setAttribute("primaryIdentifier", primaryIdentifier.substring(primaryIdentifier.indexOf(':') + 1));
+        }
     }
 
 }
